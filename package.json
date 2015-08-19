@@ -1,0 +1,19 @@
+{
+  "name": "Home",
+  "version": "1.0.0",
+  "description": "Recreation of the Coke Studios website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Mark Hughes <mark@markeh.me>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3",
+    "CSMusicMixer": "MarkehMe/MusicMixer"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/MarkehMe/CSWebsite.git"
+  }
+}

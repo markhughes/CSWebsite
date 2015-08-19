@@ -1,0 +1,7 @@
+# Please don't share your thumbnail caches
+.DS_Store
+Thumbs.db
+
+# No logs
+*.logs
+*.log

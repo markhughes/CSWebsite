@@ -1,0 +1,301 @@
+/*
+ *
+ * Created by MarkehMe / Mark Hughes <mark@markeh.me>
+ * Original assets are © 2002-2007 The Coca-Cola Company, Coca-Cola, Coke,
+ * V-ego, Launching Pad and Decibel Central are trademarks of The Coca-Cola Company.
+ * All other code is licensed under the MIT license.
+ *
+ * Copyright (c) 2015 Mark Hughes <mark@markeh.me>
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *
+ */
+
+/* Small fixes */
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+/* ... this is as far as I'm gonna go with making the interface work better */
+img {
+	-webkit-user-drag: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+/* Navigation */
+nav {
+	position: absolute;
+	left: 176px;
+	top: 0;
+}
+
+nav #bar {
+	width: 584px;
+}
+
+nav ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+nav ul li, nav ul li a { display: block; float: left; padding: 0; margin: 0;  height: 26px; }
+
+nav ul li a span {
+	display: none;
+}
+
+nav ul li.home, nav ul li.home a {
+	background-image:url("/images/nav/home.jpg");
+	width: 50px;
+}
+
+nav ul li.cokestudios, nav ul li.cokestudios a {
+	background-image:url("/images/nav/cokestudios.jpg");
+	width: 92px;
+}
+
+nav ul li.games, nav ul li.games a {
+	background-image:url("/images/nav/games.jpg");
+	width: 65px;
+}
+
+nav ul li.music-mixer, nav ul li.music-mixer a {
+	background-image:url("/images/nav/music-mixer.jpg");
+	width: 87px;
+}
+
+nav ul li.music, nav ul li.music a {
+	background-image:url("/images/nav/music.jpg");
+	width: 53px;
+}
+
+nav ul li.dc, nav ul li.dc a {
+	background-image:url("/images/nav/dc.jpg");
+	width: 107px;
+}
+
+nav ul li.downloads, nav ul li.downloads a {
+	background-image:url("/images/nav/downloads.jpg");
+	width: 83px;
+}
+nav ul li.help, nav ul li.help a {
+	background-image:url("/images/nav/help.jpg");
+	width: 47px;
+}
+
+/* Badge Placement */
+#badge {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+#main-section iframe {
+	width: 584px;
+	height: 413px;
+	border: none;
+	left: 176px;
+	top: 39px;
+	position: absolute;
+}
+
+
+.credit-warning-copyright-help-please-dont-sue-me {
+	color: rgb(152, 152, 152);
+	font-size: 10px;
+	width: 760px;
+	text-align: center;
+}
+
+.inner-page .credit-warning-copyright-help-please-dont-sue-me {
+	position: absolute;
+	top: 453px;
+
+}
+
+.fourOhFour h1, .fourOhFour p {
+	text-align: center;
+	padding: 10px;
+}
+
+/** Start original **/
+
+
+
+/* General */
+
+BODY, TD, TR, P {
+	font-family:Verdana, Geneva, Arial;
+	text-decoration:none;
+	font-size:9px;
+	color:#000000;
+	line-height: 12px;
+}
+
+A {
+	color: #cc0000;
+}
+
+A:hover {
+	color: #000000;
+	text-decoration:none;
+}
+
+A:visited {
+	color: #999999;
+}
+
+A:visited:hover {
+	color: #000000;
+}
+
+/* Generic Text */
+
+.copy {
+	font-family:Verdana, Geneva, Arial;
+	text-decoration:none;
+	font-size:9px;
+	color:#333333;
+	line-height: 12px;
+}
+
+.header {
+	font-family:Verdana, Geneva, Arial;
+	text-decoration:none;
+	font-size:16px;
+	color:#000000;
+	line-height: 19px;
+}
+
+.copyLarge {
+	font-family:Verdana, Geneva, Arial;
+	text-decoration:none;
+	font-size:11px;
+	color:#333333;
+	line-height: 14px;
+}
+
+.quote {
+	font-family:Verdana, Geneva, Arial;
+	text-decoration:none;
+	font-size:9px;
+	color:#FF0066;
+	line-height: 14px;
+}
+
+/* Form Elements */
+
+INPUT {
+	font:9px Verdana, Geneva, Arial;
+	color:#333333;
+	line-height: 12px;
+}
+
+TEXTAREA {
+	background:#FFFFFF;
+	font:9px Verdana, Geneva, Arial;
+	color:#333333;
+	line-height: 12px;
+}
+
+SELECT {
+	/*background:#FFFFFF; */
+	font:9px Verdana, Geneva, Arial;
+	color:#333333;
+	line-height: 12px;
+}
+
+.noborder {
+	border:0px;
+}
+
+FORM {
+	display:inline;
+}
+
+.newsletter {
+	width: 133px;
+}
+
+TD.primera { background-color: #65CC33; color:#000000; text-align: center }
+      TD.primera A { color: #000000; } A:hover { color: #000000; } A:visited { color: #000000; } A:visited:hover { color: #000000; }
+TD.segunda { background-color: #B2e799; color:#000000; text-align: center }
+      TD.segunda A { color: #000000; } A:hover { color: #000000; } A:visited { color: #000000; } A:visited:hover { color: #000000; }
+TD.tercera { background-color: #CCFFB2; color:#000000; text-align: center }
+      TD.tercera A { color: #000000; } A:hover { color: #000000; } A:visited { color: #000000; } A:visited:hover { color: #000000; }
+
+.prize_title {
+	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size:  14px;
+	font-weight : bold;
+	line-height : 16px;
+}
+
+.prize_content {
+	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight : bold;
+	color : #3a2512;
+	line-height : 12px;
+}
+
+.prize_link {
+	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight : bold;
+	color : #3a2512;
+	line-height : 14px;
+}
+
+.prize_link:visited::hover {
+	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight : bold;
+	color : #3a2512;
+	line-height : 14px;
+}
+
+.error_title {
+	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size : 10px;
+	color : Red;
+}
+
+.error_body {
+	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size : 10px;
+	color : Black;
+}
+
+.error_link {
+	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size : 10px;
+	color : Red;
+}
+
+.bottom_link {
+	color: #cc0000;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-style: normal;
+	font-weight: normal;
+}
+
+.bottom_link:hover {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-style: normal;
+	font-weight: normal;
+	color: #000000;
+    text-decoration:none;
+}
