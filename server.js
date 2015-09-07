@@ -30,12 +30,14 @@ pageManager.setPage("music-mixer", __dirname + "/templates/page.html");
 pageManager.setPage("help", __dirname + "/templates/page.html");
 pageManager.setPage("registration", __dirname + "/templates/page.html");
 pageManager.setPage("games", __dirname + "/templates/page.html");
+pageManager.setPage("downloads", __dirname + "/templates/page.html");
 
 // sub page routes
 pageManager.setPage("music-mixer-sub", __dirname + "/templates/music-mixer.html");
 pageManager.setPage("help-sub", __dirname + "/templates/help.html");
 pageManager.setPage("registration-sub", __dirname + "/templates/preregistration.html");
 pageManager.setPage("games-sub", __dirname + "/templates/games.html");
+pageManager.setPage("downloads-sub", __dirname + "/templates/downloads.html");
 
 // license route
 pageManager.setPage("license", __dirname + "/templates/page.html");
