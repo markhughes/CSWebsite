@@ -36,7 +36,7 @@ sudo -- sh -c "echo 127.0.0.1 cokestudios.local >> /etc/hosts"
 #### localhost/127.0.0.1/file update: Windows _(xp, vista, 7, 8, 10)_
 Run this in Command Prompt under Windows to add cokestudios.local to your hosts file:
 ```
-echo 127.0.0.1 cokestudioslocal >> %WINDIR%\System32\Drivers\Etc\Hosts
+echo 127.0.0.1 cokestudios.local >> %WINDIR%\System32\Drivers\Etc\Hosts
 ```
 
 If that did not work, there is a file in the scripts folder called HostsFileWindows.cmd.
