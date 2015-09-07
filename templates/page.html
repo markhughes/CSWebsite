@@ -30,13 +30,13 @@
       <img src="/images/nav/top_red.jpg" alt="" border="0" id="bar" /><br />
       <ul>
         <li class="home"><a href="index.jsp?section=home"><span>Home</span></a></li>
-        <li class="cokestudios"><a href="index.jsp?section=cokestudios"><span>Cokestudios</span></a></li>
-        <li class="games"><a href="index.jsp?section=games"><span>Games</span></a></li>
-        <li class="music-mixer"><a href="index.jsp?section=music-mixer"><span>Music-Mixer</span></a></li>
-        <li class="music"><a href="index.jsp?section=music"><span>Music</span></a></li>
-        <li class="dc"><a href="index.jsp?section=decible-central"><span>Decible Central</span></a></li>
-        <li class="downloads"><a href="index.jsp?section=downloads"><span>Downloads</span></a></li>
-        <li class="help"><a href="index.jsp?section=help"><span>Help</span></a></li>
+        <li class="cokestudios"><a href="index.jsp?section=cokestudios-sub" target="content-frame"><span>Cokestudios</span></a></li>
+        <li class="games"><a href="index.jsp?section=games-sub" target="content-frame"><span>Games</span></a></li>
+        <li class="music-mixer"><a href="index.jsp?section=music-mixer-sub" target="content-frame"><span>Music-Mixer</span></a></li>
+        <li class="music"><a href="index.jsp?section=music-sub" target="content-frame"><span>Music</span></a></li>
+        <li class="dc"><a href="index.jsp?section=decible-central-sub" target="content-frame"><span>Decible Central</span></a></li>
+        <li class="downloads"><a href="index.jsp?section=downloads-sub" target="content-frame"><span>Downloads</span></a></li>
+        <li class="help"><a href="index.jsp?section=help-sub" target="content-frame"><span>Help</span></a></li>
       </ul>
     </nav>
 
@@ -58,6 +58,8 @@
 
         var frame = document.createElement("IFRAME");
         frame.src = "/index.jsp?section="+section+"-sub";
+        frame.id = "content-frame";
+        frame.name = "content-frame";
 
         document.getElementById("main-section").appendChild(frame);
       </script>
