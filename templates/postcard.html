@@ -1,0 +1,930 @@
+<!--
+ *
+ * Created by MarkehMe / Mark Hughes <mark@markeh.me>
+ * Original assets are © 2002-2007 The Coca-Cola Company, Coca-Cola, Coke,
+ * V-ego, Launching Pad and Decibel Central are trademarks of The Coca-Cola Company.
+ * All other code is licensed under the MIT license.
+ *
+ * Copyright (c) 2015 Mark Hughes <mark@markeh.me>
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *
+-->
+
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<link href="/css/css_coke.css" rel="stylesheet" type="text/css">
+	<title>Coke Music Game Lounge</title>
+
+	<script language="JavaScript">
+
+
+
+function GetCookie (name) 
+{  
+var arg = name + "=";  
+var alen = arg.length;  
+var clen = document.cookie.length;  
+var i = 0;  
+while (i < clen) {    
+var j = i + alen;    
+if (document.cookie.substring(i, j) == arg)      
+return getCookieVal (j);    
+i = document.cookie.indexOf(" ", i) + 1;    
+if (i == 0) break;   
+}  
+return "";
+}
+
+function getCookieVal(offset) 
+{
+var endstr = document.cookie.indexOf (";", offset);
+if (endstr == -1)
+endstr = document.cookie.length;
+return unescape(document.cookie.substring(offset, endstr));
+}
+
+function RemoveCookie (name) 
+{ 
+	if (GetCookie(name) != "") 
+	{
+		document.cookie = name +  "="  + "; expires=Thu, 01-Jan-70 00:00:01 GMT";
+ 	}
+}
+
+
+function openWindow(section)
+{
+	var fileName = "";
+	var w = 500;
+	var h = 560;
+	if (section == "policy")
+	{
+		fileName = "https://web.archive.org/web/20021209162605/http://www.cokemusic.com/home/privacypolicy.html";
+		w = 570;
+		h = 520;
+	}	
+	else
+	{
+		fileName = "https://web.archive.org/web/20021209162605/http://cariocas.cokemusic.com/cdc/rules.jsp";
+		w = 680;
+		h = 520;
+	}
+
+	//var winl = (screen.width - w) / 2;
+	//var wint = (screen.height - h) / 2;
+	var winl = 0;
+	var wint = 0;
+	winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars=yes,resizable=0,menubar=0' ;
+	title = 'CokeMusic' ;
+	win = window.open(fileName, title, winprops);
+	if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
+}
+
+
+
+function emailCheck(formField) 
+		{
+			var emailStr = formField.value;
+			/* The following variable tells the rest of the function whether or not
+			to verify that the address ends in a two-letter country or well-known
+			TLD.  1 means check it, 0 means don't. */
+		
+			var checkTLD=1;
+		
+			/* The following is the list of known TLDs that an e-mail address must end with. */
+			
+			var knownDomsPat=/^(com|net|org|edu|int|mil|gov|arpa|biz|aero|name|coop|info|pro|museum)$/;
+		
+			/* The following pattern is used to check if the entered e-mail address
+			fits the user@domain format.  It also is used to separate the username
+			from the domain. */
+		
+			var emailPat=/^(.+)@(.+)$/;
+			
+			/* The following string represents the pattern for matching all special
+			characters.  We don't want to allow special characters in the address. 
+			These characters include ( ) < > @ , ; : \ " . [ ] */
+			
+			var specialChars="\\(\\)><@,;:\\\\\\\"\\.\\[\\]";
+			
+			/* The following string represents the range of characters allowed in a 
+			username or domainname.  It really states which chars aren't allowed.*/
+			
+			var validChars="\[^\\s" + specialChars + "\]";
+			
+			/* The following pattern applies if the "user" is a quoted string (in
+			which case, there are no rules about which characters are allowed
+			and which aren't; anything goes).  E.g. "jiminy cricket"@disney.com
+			is a legal e-mail address. */
+			
+			var quotedUser="(\"[^\"]*\")";
+			
+			/* The following pattern applies for domains that are IP addresses,
+			rather than symbolic names.  E.g. joe@[123.124.233.4] is a legal
+			e-mail address. NOTE: The square brackets are required. */
+			
+			var ipDomainPat=/^\[(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\]$/;
+			
+			/* The following string represents an atom (basically a series of non-special characters.) */
+			
+			var atom=validChars + '+';
+			
+			/* The following string represents one word in the typical username.
+			For example, in john.doe@somewhere.com, john and doe are words.
+			Basically, a word is either an atom or quoted string. */
+			
+			var word="(" + atom + "|" + quotedUser + ")";
+			
+			// The following pattern describes the structure of the user
+			
+			var userPat=new RegExp("^" + word + "(\\." + word + ")*$");
+			
+			/* The following pattern describes the structure of a normal symbolic
+			domain, as opposed to ipDomainPat, shown above. */
+			
+			var domainPat=new RegExp("^" + atom + "(\\." + atom +")*$");
+			
+			/* Finally, let's start trying to figure out if the supplied address is valid. */
+			
+			/* Begin with the coarse pattern to simply break up user@domain into
+			different pieces that are easy to analyze. */
+			
+			var matchArray=emailStr.match(emailPat);
+			
+			if (matchArray==null) 
+			{
+			
+				/* Too many/few @'s or something; basically, this address doesn't
+				even fit the general mould of a valid e-mail address. */
+			
+				alert("The email field is blank or invalid email address.");
+				formField.select();
+				formField.focus();
+				return false;
+			}
+			
+			var user=matchArray[1];
+			var domain=matchArray[2];
+			
+			// Start by checking that only basic ASCII characters are in the strings (0-127).
+			
+			for (i=0; i<user.length; i++) 
+			{
+				if (user.charCodeAt(i)>127) 
+				{
+					alert("The email field is blank or invalid email address.");
+					formField.select();
+					formField.focus();
+					return false;
+			   }
+			}
+			
+			for (i=0; i<domain.length; i++) 
+			{
+				if (domain.charCodeAt(i)>127) 
+				{
+					alert("The email field is blank or invalid email address.");
+					formField.select();
+					formField.focus();
+					return false;
+			   }
+			}
+			
+			// See if "user" is valid 
+			
+			if (user.match(userPat)==null) 
+			{
+				// user is not valid
+				alert("The email field is blank or invalid email address.");
+				formField.select();
+				formField.focus();
+				return false;
+			}
+		
+			/* if the e-mail address is at an IP address (as opposed to a symbolic
+			host name) make sure the IP address is valid. */
+		
+			var IPArray=domain.match(ipDomainPat);
+			if (IPArray!=null) 
+			{
+		
+			// this is an IP address
+				for (var i=1;i<=4;i++) 
+				{
+					if (IPArray[i]>255) 
+					{
+						alert("The email field is blank or invalid email address.");
+						formField.select();
+						formField.focus();
+						return false;
+					}
+				}
+				return true;
+			}
+		
+			// Domain is symbolic name.  Check if it's valid.
+		 
+			var atomPat=new RegExp("^" + atom + "$");
+			var domArr=domain.split(".");
+			var len=domArr.length;
+			for (i=0;i<len;i++) 
+			{
+				if (domArr[i].search(atomPat)==-1) 
+				{
+					alert("The email field is blank or invalid email address.");
+					formField.select();
+					formField.focus();
+					return false;
+				}
+			}
+		
+			/* domain name seems valid, but now make sure that it ends in a
+			known top-level domain (like com, edu, gov) or a two-letter word,
+			representing country (uk, nl), and that there's a hostname preceding 
+			the domain or country. */
+		
+			if (checkTLD && domArr[domArr.length-1].length!=2 && 
+				domArr[domArr.length-1].search(knownDomsPat)==-1) 
+			{
+				alert("The email field is blank or invalid email address.");
+				formField.select();
+				formField.focus();
+				return false;
+			}
+		
+			// Make sure there's a host name preceding the domain.
+		
+			if (len<2) 
+			{
+				alert("The email field is blank or invalid email address.");
+				formField.select();
+				formField.focus();
+				return false;
+			}
+		
+			// If we've gotten this far, everything's valid!
+			return true;
+		}
+		
+		function isString(formField, fieldName, minLength)
+		{
+			var str = formField.value;
+			
+			if (str == "") 
+			{
+				alert("\nThe  " + fieldName + " field  is blank.\n\nPlease enter a value.");
+				formField.select();
+				formField.focus();
+				return false;
+			}
+			
+			var ch1 = str.substring(0,1);	
+		
+			if ((ch1 >= "0" && ch1 <= "9") || (str.length < minLength && minLength != -1))
+			{		
+				return false;
+			}
+			
+			for (var i = 0; i < str.length; i++) 
+			{
+				var ch = str.substring(i, i + 1);
+				if (((ch < "a" || "z" < ch) && (ch < "A" || "Z" < ch)) && ch != ' '
+				&& (ch < "0" || "9" < ch) && ch != '_') 
+				{
+					alert("\nThe " + fieldName + " field only accepts letters & spaces.\n\nPlease re-enter");
+					formField.select();
+					formField.focus();
+					return false;
+				   }
+			}
+			return true;
+		}
+		
+		function emailLengthCheck(formField) 
+		{
+			var emailStr = formField.value;
+			if (emailStr.length<1)
+				return true;
+			else
+			return emailCheck(formField);	
+			
+		}
+		
+		function checkEmails(form){
+		
+		var diffValue=true;
+		var emails = new Array(5);
+		emails[0] = form.to1.value;
+		emails[1] = form.to2.value;
+		emails[2] = form.to3.value;
+		emails[3] = form.to4.value;
+		emails[4] = form.to5.value;
+		
+		
+		for (i=0;i<emails.length;i++)
+		 {
+		  
+		  if (emails[i].length >0)
+		  {
+		   for (j=0;j<emails.length;j++) 
+			 if (emails[j].length >0) 
+			 {
+			  
+			  if (emails[j]==emails[i]&&i!=j)
+			  {
+				alert('Duplicate email addresses found.');
+				 return false;      
+			  }
+			 }
+		  }
+		   
+		
+		 }
+		
+		 return diffValue;
+		}
+		
+		function isStringEmail(formField, fieldName, formField2)
+		{
+		
+			var str = formField.value;
+			var str2 = formField2.value;	
+			if (str.length>0){
+			
+			if (str2 == "") 
+			{
+				alert("\nThe " + fieldName + "field  is blank.\n\nPlease make an entry.");
+				formField2.select();
+				formField2.focus();
+				return false;
+			}
+			}
+			return true;
+		}
+		
+		
+		function checkMessage(){
+		var form = document.forms[0];
+		if (form.msgID.value<=0)
+		 {
+		 alert('Please choose a message.');
+		 return false;
+		 }
+		 else return true;
+		}
+		
+		function submitthis(){
+		var form = document.forms[0];
+		
+		
+		if ((checkMessage())&&(checkEmails(form))&&(isString(form.name, "name"))&&(isString(form.name1, "name"))&&(isStringEmail(form.name2, "email",form.to2))&&(isStringEmail(form.name3, "email",form.to3))&&(isStringEmail(form.name4, "email",form.to4))&&(isStringEmail(form.name5, "email",form.to5))&&(emailCheck(form.from))&&(emailCheck(form.to1))&&(emailLengthCheck(form.to2))&&(emailLengthCheck(form.to3))&&(emailLengthCheck(form.to4))&&(emailLengthCheck(form.to5)))
+		form.submit();
+		}
+		
+		
+		
+		
+		function submitjsp(name){
+		var form = document.forms[0];
+		form.moviefilename.value=name;
+		form.action="sessionpostcard.jsp";
+		form.submit();
+		
+		}
+		
+		
+		
+		function preview(moviename,message_text){
+		var message=message_text;
+		var form = document.forms[0];
+		var name=form.name.value;
+		winl = (screen.width - 510) / 2;
+		var wint = (screen.height - 480) / 2;
+		//form.message_text.value=form.messageText.value;
+		if (form.select.selectedIndex >0)
+		message=form.select.options[form.select.selectedIndex].text;
+		
+		var  urlstr="postcardpreview.jsp?moviename="+moviename+"&message_text="+message+"&name="+name;
+		//var  urlstr="postcardpreview.jsp?moviename='"+moviename+"'&message_text='"+message_text+"'");
+		window.open(urlstr,"CntrlWindow","top="+wint+",left="+winl+",toolbar=0,width=510,height=460,resizable=0,scrollbars=0");
+		
+		}
+		function isNetscape() 
+		{
+		
+			// get browser info. 
+			var appName = navigator.appName;
+			var appLongVer = navigator.appVersion;
+			var appVer = appLongVer.substring(0, 1); 
+			
+			// check for Navigator ver 4+. 
+			if ((appName == "Netscape") && (appVer >= 4)) 
+			{
+				return true;
+			}
+			
+			return false;
+		}
+		
+		function isIE() 
+		{
+		
+			// get browser info. 
+			var appName = navigator.appName;
+			var appLongVer = navigator.appVersion;
+			var appVer = appLongVer.substring(0, 1); 
+			
+			// check for IE ver 4+. 
+			if ((appName == "Microsoft Internet Explorer") && (appVer >= 4)) 
+			{
+				return true;
+			}
+			
+			return false;
+		}
+		
+		
+		function loadMe(msgid,popup){
+		var form=document.forms[0];
+		if (msgid >=0){
+		form.select.options[msgid].selected=true;
+		writeText('resultText',form.select.options[form.select.selectedIndex].text);
+		
+		}
+		}
+		
+		
+		
+		function popWindow()
+			 {
+			window.open("postcardconf.htm","CntrlWindow","location=0,toolbar=0,width=640,height=480,resizable=0,scrollbars=0");
+			}
+		
+		
+		function writeText(id,text) 
+		{
+		
+			var element;
+			if (isNetscape()) 
+			{
+				element = document.getElementById(id);	
+		
+			}
+			else if (isIE())
+			{ 
+		
+				element = document.all[id];
+			}
+			element.innerHTML = text;
+			document.forms[0].msgID.value=document.forms[0].select.value;
+		}
+		
+		function MM_swapImgRestore() { //v3.0
+		  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+		}
+		
+		function MM_preloadImages() { //v3.0
+		  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+			var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+			if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+		}
+		
+		function MM_findObj(n, d) { //v4.0
+		  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+			d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+		  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+		  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+		  if(!x && document.getElementById) x=document.getElementById(n); return x;
+		}
+		
+		function MM_swapImage() { //v3.0
+		  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+		   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+		}
+		
+		function MM_openBrWindow(theURL,winName,features) { //v2.0
+		  window.open(theURL,winName,features);
+		}
+		</script>
+
+</head>
+
+<body>
+
+	<table width="75%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td>
+				<table width="75%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td><img src="/images/postcard/postreg_topbanner.jpg"
+								width="588" height="72"></td>
+					</tr>
+				</table>
+				<table width="75%" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td>
+							<table width="75%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td valign="top"><img
+											src="/images/postcard/postreg_left.gif"
+											width="21" height="370"></td>
+									<td>
+										<form name="form1" method="post"
+											action="/servlet/PostCard">
+											<input type="hidden" name="register" value="0">
+											<input type="hidden" name="popup" value="0">
+											<input type="hidden" name="msgID" value="-1">
+											<input type="hidden" name="moviefilename" value="1">
+											<input type="hidden" name="message_text" value="">
+											<table width="75%" border="0" cellspacing="0" cellpadding="0">
+												<tr>
+
+													<td>
+														<table width="90%" border="0" cellspacing="0" cellpadding="0"
+															align="center">
+															<tr>
+																<td><img src="/images/postcard/postreg_arrow.gif"
+																		width="17" height="32"></td>
+																<td>Choose your music and your message. (Coke Music
+																	pass holders get to write their own - hint, hint!)
+																	<a href="/registration/index.htm"
+																		target="_parent">(Register
+																		here). </a><br>
+																	<br>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<table width="100%" border="0" cellspacing="0" cellpadding="0">
+															<tr>
+																<td><img src="/images/postcard/postreg_titleselectavid.gif"
+																		width="319" height="24">
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+												<tr>
+													<td><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+															codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0"
+															width="319" height="93">
+															<param name="movie" value="media/postcard_menu.swf">
+															<param name="quality" value="high">
+															<embed
+																src="/web/20021201082007oe_/http://www.cokemusic.com/postcard/media/postcard_menu.swf"
+																quality="high"
+																pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
+																type="application/x-shockwave-flash" width="319"
+																height="93">
+															</embed>
+														</object></td>
+												</tr>
+												<tr>
+													<td><img src="/images/postcard/postreg_titletypeyourmes.gif"
+															width="319" height="27"></td>
+												</tr>
+												<tr>
+													<td align="center" height="50">
+														<table width="90%" border="0" height="50">
+															<tr>
+																<td colspan="2"> <br>
+																	<br>
+																	<select name="select"
+																		onchange="writeText('resultText',this.options[this.selectedIndex].text)">
+
+																		<option value="1">Choose your message</option>
+																		<option value="1">Here's something new for a
+																			change!</option>
+																		<option value="2">Heard this. Thought of you.
+																			Come check it out.</option>
+																		<option value="3">Show some love for these
+																			slammin new artists!</option>
+																		<option value="4">Get the hook up for new music
+																			first</option>
+																		<option value="5">Flip the script on tired music
+																		</option>
+																		<option value="6">Silly rabbit, all the cool
+																			music is right here!</option>
+
+
+
+																	</select>
+
+																	<br>
+																</td>
+															</tr>
+															<tr>
+																<td colspan="2">&nbsp;</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+												<tr>
+													<td><img src="/images/postcard/postreg_titlesendit.gif"
+															width="319" height="28"></td>
+												</tr>
+												<tr>
+													<td align="center" valign="top">
+														<table width="90%" border="0">
+															<tr>
+																<td>
+																	<div align="right">
+																		<table border="0" cellpadding="3"
+																			cellspacing="0" width="360" height="47">
+																			<!-- BEGIN TO/FROM SECTION -->
+																			<tr>
+																				<td valign="top" height="50" width="39">
+																					<font face="Arial, sans-serif"
+																						color="#990000" size="2"><b
+																							class="copyLarge">From:</b>
+																					</font><br>
+																				</td>
+																				<td valign="top" height="50"
+																					width="154">
+																					<font face="Arial, sans-serif"
+																						size="1" class="copy">Name:
+																					</font><br>
+																					<input type="TEXT" name="name"
+																						maxlength="28" value="">
+																				</td>
+																				<td valign="top" height="50"
+																					width="200">
+																					<font face="Arial, sans-serif"
+																						size="1" class="copy">Email
+																						Address:</font><br>
+																					<input type="TEXT" name="from"
+																						maxlength="88" value="">
+																				</td>
+																			</tr>
+																			<tr>
+																				<td valign="top" height="31" width="39">
+																					<font face="Arial, sans-serif"
+																						color="#990000" size="2"></font>
+																				</td>
+																				<td valign="bottom" height="31"
+																					colspan="2">
+																					<font face="arial, sans-serif"
+																						color="#000000" size="1"
+																						class="copy"><b><br>
+																							<span class="copyLarge">Send
+																								your
+																								card
+																								to
+																								up
+																								to
+																								5
+																								people!</span></b>
+																					</font>
+																				</td>
+																			</tr>
+																			<!--START ADDITIONAL RECIPIENTS BOX-->
+																			<tr>
+																				<td height="12" width="39" valign="top">
+																					<font face="Arial, sans-serif"
+																						color="#990000" size="2"><b
+																							class="copyLarge">To:</b>
+																					</font>
+																				</td>
+																				<td valign="bottom" height="0"
+																					align="left">
+																					<font face="Arial, sans-serif"
+																						size="1">Name:</font><br>
+																					<input type="TEXT" name="name1"
+																						maxlength="28" value="">
+																				</td>
+																				<td valign="bottom" height="0"
+																					align="left">
+																					<font face="Arial, sans-serif"
+																						size="1">Email
+																						Address:</font>
+																					<input type="TEXT" name="to1"
+																						maxlength="88" value="">
+																				</td>
+																			</tr>
+																			<tr>
+																				<td height="12" width="39">
+																					<font face="Arial, sans-serif"
+																						color="#990000" size="2"></font>
+																				</td>
+																				<td valign="bottom" height="0"
+																					align="left">
+																					<font face="Arial, sans-serif"
+																						size="1">Name:</font><br>
+																					<input type="TEXT" name="name2"
+																						maxlength="28" value="">
+																				</td>
+																				<td valign="bottom" height="0"
+																					align="left">
+																					<font face="Arial, sans-serif"
+																						size="1">Email
+																						Address:</font>
+																					<input type="TEXT" name="to2"
+																						maxlength="88" value="">
+																				</td>
+																			</tr>
+																			<tr>
+																				<td height="24" width="39">&nbsp;</td>
+																				<td valign="bottom" height="0"
+																					align="left">
+																					<font face="Arial, sans-serif"
+																						size="1">Name:</font><br>
+																					<input type="TEXT" name="name3"
+																						maxlength="28" value="">
+																				</td>
+																				<td valign="bottom" height="0"
+																					align="left">
+																					<font face="Arial, sans-serif"
+																						size="1">Email
+																						Address:</font>
+																					<input type="TEXT" name="to3"
+																						maxlength="88" value="">
+																				</td>
+																			</tr>
+																			<tr>
+																				<td height="24" width="39">&nbsp;</td>
+																				<td valign="bottom" height="24"
+																					align="left">
+																					<font face="Arial, sans-serif"
+																						size="1">Name:</font><br>
+																					<input type="TEXT" name="name4"
+																						maxlength="28" value="">
+																				</td>
+																				<td valign="bottom" height="24"
+																					align="left">
+																					<font face="Arial, sans-serif"
+																						size="1">Email
+																						Address:</font>
+																					<input type="TEXT" name="to4"
+																						maxlength="88" value="">
+																				</td>
+																			</tr>
+																			<tr>
+																				<td height="24" width="39">&nbsp;</td>
+																				<td valign="bottom" height="24"
+																					align="left">
+																					<font face="Arial, sans-serif"
+																						size="1">Name:</font><br>
+																					<input type="TEXT" name="name5"
+																						maxlength="28" value="">
+																				</td>
+																				<td valign="bottom" height="24"
+																					align="left">
+																					<font face="Arial, sans-serif"
+																						size="1">Email
+																						Address:</font>
+																					<input type="TEXT" name="to5"
+																						maxlength="88" value="">
+																				</td>
+																			</tr>
+
+																			<!-- END TO/FROM SECTION -->
+																		</table>
+																	</div>
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+												<tr>
+													<td align="center">
+														<div align="left">
+															<table border="0" cellspacing="0" cellpadding="0"
+																height="22" width="300">
+																<tr>
+																	<td width="151" align="right">
+																		<div align="right"><a
+																				href="javascript:preview('1','');;"
+																				onmouseout="MM_swapImgRestore()"
+																				onmouseover="MM_swapImage('preview','','/images/postcard/buttons_blue_preview-ro.gif',1)"><img
+																					src="/images/postcard/buttons_blue_preview.gif"
+																					width="94" height="21"
+																					name="preview" border="0"></a></div>
+																	</td>
+																	<td width="53">&nbsp;</td>
+																	<td width="96" align="right">
+																		<div align="right"><a
+																				href="javascript:submitthis();"
+																				onmouseout="MM_swapImgRestore()"
+																				onmouseover="MM_swapImage('send','','/images/postcard/button_blue_submit_ro.gif',1)"><img
+																					src="/images/postcard/button_blue_submit.gif"
+																					width="94" height="21" name="send"
+																					border="0"></a></div>
+																	</td>
+																</tr>
+															</table>
+															<br>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>
+
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<table border="0" cellspacing="0" cellpadding="0">
+															<tr>
+																<td>&nbsp;</td>
+															</tr>
+														</table>
+
+														<blockquote> <span class="copyright-tag"> <a href="#"
+																	onclick="javascript:openWindow('policy')">Privacy
+																	Policy</a> <a href="#"
+																	onclick="javascript:openWindow('rules')">Rules</a>
+																&copy; 2002 The <nobr>Coca-Cola</nobr> Company, <nobr>
+																	Coca-Cola</nobr>, Coke,
+																V-ego, Launching Pad and Decibel Central are trademarks
+																of The Coca-Cola Company.
+															</span> </blockquote>
+													</td>
+												</tr>
+											</table>
+										</form>
+
+									</td>
+									<td valign="top">
+										<table width="75%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td><img src="/images/postcard//1.gif"
+														width="248" height="205"></td>
+											</tr>
+											<tr>
+												<td>
+													<table border="0" cellspacing="0" cellpadding="0" width="100%">
+														<tr>
+															<td valign="top"><img
+																	src="/images/postcard/postreg_pre-left.gif"
+																	width="17" height="155"></td>
+															<td valign="bottom">
+																<table width="90%" border="0" cellspacing="0"
+																	cellpadding="0" align="center">
+																	<tr>
+																		<td>
+																			<span id="resultText"
+																				style="position:relative">
+																				<p></p>
+																			</span>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td><br>
+																			<br>
+																			<br>
+																			<br>
+																		</td>
+																	</tr>
+																</table>
+																<table border="0" cellspacing="0" cellpadding="0"
+																	width="100%" height="20">
+																	<tr>
+																		<td
+																			background="/images/postcard/postreg_pre-guitar.gif">
+
+																		</td>
+																	</tr>
+																</table>
+															</td>
+															<td valign="bottom">
+																<div align="right"><img
+																		src="/images/postcard/postreg_pre-right.gif"
+																		width="27" height="155"></div>
+															</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+											<tr>
+												<td><img src="/images/postcard/postreg_pre-bottom.gif"
+														width="248" height="23"></td>
+											</tr>
+											<tr>
+												<td><img src="/images/postcard/postreg_pre-guitar2.gif"
+														width="248" height="71"></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+</body>
+
+</html>

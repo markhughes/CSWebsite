@@ -32,6 +32,7 @@ pageManager.setPage("registration", __dirname + "/templates/page.html");
 pageManager.setPage("games", __dirname + "/templates/page.html");
 pageManager.setPage("downloads", __dirname + "/templates/page.html");
 pageManager.setPage("lpad", __dirname + "/templates/page.html");
+pageManager.setPage("postcard", __dirname + "/templates/page.html");
 
 // sub page routes
 pageManager.setPage("music-mixer-sub", __dirname + "/templates/music-mixer.html");
@@ -40,6 +41,7 @@ pageManager.setPage("registration-sub", __dirname + "/templates/preregistration.
 pageManager.setPage("games-sub", __dirname + "/templates/games.html");
 pageManager.setPage("downloads-sub", __dirname + "/templates/downloads.html");
 pageManager.setPage("lpad-sub", __dirname + "/templates/lpad.html");
+pageManager.setPage("postcard-sub", __dirname + "/templates/postcard.html");
 
 // license route
 pageManager.setPage("license", __dirname + "/templates/page.html");
@@ -60,14 +62,46 @@ app.post(['/login/Login'], function (req, res) {
   let refresh = false;
   let daysToExpire = 100;
   let sacStatus = '1';
+  let password = req.param('PASSWORD');
+  let email = req.param('EMAIL');
+  let person_id = 1;
+  let errorMessage = 'test';
+  let dbTotal = 100;
+  let screenName = 'Markeh';
+  let avatarString = 'hr=001/255,194,115&hd=001/245,226,203&ey=001/245,226,203&fc=001/245,226,203&bd=001/245,226,203&lh=001/245,226,203&rh=001/245,226,203&ch=001/255,194,115&ls=002/238,238,238&rs=002/238,238,238&lg=001/127,102,64&sh=001/194,123,56';
+  let resultCode = 'CMLOGGEDIN'; // INACTIVE, FCLOGGEDIN, CMLOGGEDIN
+
+  var test = "rCode=" + resultCode + "\n";
+  test = test + ("avatar_str=" + avatarString + "\n");
+  test = test + ("screen_name=" + screenName + "\n");
+  test = test + ("db_total=" + dbTotal + "\n");
+  //test = test + ("error_msg=" + errorMessage + "\n");
+  test = test + ("person_id=" + person_id + "\n");
+  //test = test + ("EMAIL=" + email + "\n");
+  //test = test + ("PASSWORD=" + password + "\n");
+  test = test + ("SACStatus=" + sacStatus + "\n");
+  test = test + ("daysToExpire=" + daysToExpire + "\n");
+  test = test + ("refresh=" + (refresh ? 'yes' : 'no') + "\n");
+  test = test + ("showStore=" + (showStore ? 'yes' : 'no') + "\n");
+
+  setTimeout(() => {
+    res.send(test);
+  }, 50);
+});
+
+app.get(['/login/LoginPerson'], function (req, res) {
+  let showStore = true;
+  let refresh = false;
+  let daysToExpire = 100;
+  let sacStatus = '1';
   let password = "***";
   let email = "m@rkhugh.es";
   let person_id = 1;
   let errorMessage = 'test';
   let dbTotal = 100;
   let screenName = 'Markeh';
-  let avatarString = 'asdf';
-  let resultCode = 'FCLOGGEDIN'; // INACTIVE, FCLOGGEDIN, CMLOGGEDIN
+  let avatarString = 'hr=001/255,194,115&hd=001/245,226,203&ey=001/245,226,203&fc=001/245,226,203&bd=001/245,226,203&lh=001/245,226,203&rh=001/245,226,203&ch=001/255,194,115&ls=002/238,238,238&rs=002/238,238,238&lg=001/127,102,64&sh=001/194,123,56';
+  let resultCode = 'CMLOGGEDIN'; // INACTIVE, FCLOGGEDIN, CMLOGGEDIN
 
   var test = "rCode=" + resultCode + "\n";
   test = test + ("avatar_str=" + avatarString + "\n");
@@ -84,8 +118,9 @@ app.post(['/login/Login'], function (req, res) {
 
   setTimeout(() => {
     res.send(test);
-  }, 5000);
+  }, 50);
 });
+
 
 app.post(['/ssldocs/login/Login'], function (req, res) {
   res.send('<script>window.location="/";</script>');
