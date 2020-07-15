@@ -31,6 +31,7 @@ pageManager.setPage("help", __dirname + "/templates/page.html");
 pageManager.setPage("registration", __dirname + "/templates/page.html");
 pageManager.setPage("games", __dirname + "/templates/page.html");
 pageManager.setPage("downloads", __dirname + "/templates/page.html");
+pageManager.setPage("lpad", __dirname + "/templates/page.html");
 
 // sub page routes
 pageManager.setPage("music-mixer-sub", __dirname + "/templates/music-mixer.html");
@@ -38,6 +39,7 @@ pageManager.setPage("help-sub", __dirname + "/templates/help.html");
 pageManager.setPage("registration-sub", __dirname + "/templates/preregistration.html");
 pageManager.setPage("games-sub", __dirname + "/templates/games.html");
 pageManager.setPage("downloads-sub", __dirname + "/templates/downloads.html");
+pageManager.setPage("lpad-sub", __dirname + "/templates/lpad.html");
 
 // license route
 pageManager.setPage("license", __dirname + "/templates/page.html");
@@ -47,14 +49,42 @@ pageManager.setPage("license-sub", __dirname + "/templates/license.html");
 pageManager.setRewrite("create_demo", "music-mixer");
 
 // Rewrite our extras
-app.use("/music-mixer-app", express.static(__dirname + "/node_modules/MusicMixer"));
+app.use("/music-mixer-app", express.static(__dirname + "/node_modules/CSMusicMixer"));
 
 // Run our page manager
 pageManager.run(app, __dirname);
 
 // Login Status
 app.post(['/login/Login'], function (req, res) {
-  res.send('var rCode="FCLOGGEDIN"');
+  let showStore = true;
+  let refresh = false;
+  let daysToExpire = 100;
+  let sacStatus = '1';
+  let password = "***";
+  let email = "m@rkhugh.es";
+  let person_id = 1;
+  let errorMessage = 'test';
+  let dbTotal = 100;
+  let screenName = 'Markeh';
+  let avatarString = 'asdf';
+  let resultCode = 'FCLOGGEDIN'; // INACTIVE, FCLOGGEDIN, CMLOGGEDIN
+
+  var test = "rCode=" + resultCode + "\n";
+  test = test + ("avatar_str=" + avatarString + "\n");
+  test = test + ("screen_name=" + screenName + "\n");
+  test = test + ("db_total=" + dbTotal + "\n");
+  test = test + ("error_msg=" + errorMessage + "\n");
+  test = test + ("person_id=" + person_id + "\n");
+  test = test + ("EMAIL=" + email + "\n");
+  test = test + ("PASSWORD=" + password + "\n");
+  test = test + ("SACStatus=" + sacStatus + "\n");
+  test = test + ("daysToExpire=" + daysToExpire + "\n");
+  test = test + ("refresh=" + (refresh ? 'yes' : 'no') + "\n");
+  test = test + ("showStore=" + (showStore ? 'yes' : 'no') + "\n");
+
+  setTimeout(() => {
+    res.send(test);
+  }, 5000);
 });
 
 app.post(['/ssldocs/login/Login'], function (req, res) {
