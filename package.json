@@ -9,7 +9,7 @@
   "author": "Mark Hughes <mark@markeh.me>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.13.3",
+    "express": "^4.17.3",
     "CSMusicMixer": "MarkehMe/MusicMixer"
   },
   "repository": {
